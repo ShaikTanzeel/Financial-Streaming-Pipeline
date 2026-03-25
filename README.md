@@ -1,6 +1,6 @@
 # Real-Time Commodity Price Analytics Pipeline
 
-End-to-end streaming pipeline that ingests live commodity prices from Yahoo Finance, processes them through Apache Kafka and Apache Flink for real-time analytics (SMA-20), persists results to PostgreSQL, and serves them to a dashboard.
+End-to-end streaming pipeline that ingests live commodity prices from Yahoo Finance, processes them through Apache Kafka and Apache Flink for real-time analytics (SMA-20), persists results to PostgreSQL, and serves them to a live Grafana dashboard.
 
 ## Architecture
 
@@ -8,9 +8,9 @@ End-to-end streaming pipeline that ingests live commodity prices from Yahoo Fina
 Yahoo Finance API
        │
        ▼
-  Python Producers ──► Kafka Topics ──► Flink SQL ──► PostgreSQL
-  (GC=F, SI=F,         (gold_prices,    (SMA-20       (permanent
-   CL=F, DX-Y.NYB)      silver_prices,   windowed      storage,
+  Python Producers ──► Kafka Topics ──► Flink SQL ──► PostgreSQL ──► Grafana
+  (GC=F, SI=F,         (gold_prices,    (SMA-20       (permanent      (live
+   CL=F, DX-Y.NYB)      silver_prices,   windowed      storage,       dashboard)
                          oil_prices,      aggregation)  queryable)
                          usd_prices)
 ```
@@ -87,7 +87,7 @@ docker-compose.yml       # Infrastructure definition
 
 ## Configuration
 
-Copy `.env.example` to `.env` and fill in your PostgreSQL credentials before starting:
+Copy `.env.example` to `.env` and fill in your PostgreSQL and Grafana credentials before starting:
 
 ```bash
 cp .env.example .env
@@ -100,11 +100,11 @@ cp .env.example .env
 - **Decoupled producers**: One generic `commodity_producer.py` handles all tickers via `argparse`. Adding a new commodity requires only a config entry — no code changes.
 - **Multi-layer fallback**: The producer tries `fast_info` → `history()` → `info` when fetching prices, ensuring resilience against Yahoo Finance API instability.
 
-## Monitoring
+## Monitoring & Dashboards
 
-| Service    | URL                        |
-|------------|----------------------------|
-| Grafana    | http://localhost:3000      |
-| Kafdrop    | http://localhost:9000      |
-| Flink UI   | http://localhost:8081      |
-| PostgreSQL | `localhost:5432`           |
+| Service    | URL                        | Purpose |
+|------------|----------------------------|---------|
+| Grafana    | http://localhost:3000      | Real-time Price & SMA Dashboard |
+| Kafdrop    | http://localhost:9000      | Inspect raw Kafka messages |
+| Flink UI   | http://localhost:8081      | Monitor Flink job health |
+| PostgreSQL | `localhost:5432`           | Query persistent analytics data |

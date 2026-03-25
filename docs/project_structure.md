@@ -44,8 +44,8 @@ End_to_end_project/
 
 ## Design Principles
 
-1. **Separation of Concerns** — Each folder has one responsibility
-2. **Environment Isolation** — Credentials live in `.env`, not in code
-3. **Reproducibility** — Single-command setup with `docker compose up -d`
-4. **DRY (Don't Repeat Yourself)** — Generic producer handles all commodities via configuration
-5. **Observability** — Real-time visibility into every layer via Grafana and Kafdrop
+1. **Separation of Concerns** — Each layer (ingestion, processing, storage, visualization) is decoupled.
+2. **Environment Isolation** — All sensitive credentials (DB passwords, Grafana keys) live in `.env`.
+3. **Reproducibility** — One-command setup using Docker Compose.
+4. **DRY (Don't Repeat Yourself)** — Generic, parameterized scripts minimize code duplication.
+5. **Observability** — Every layer is measurable via Grafana, Kafdrop, and the Flink UI.
