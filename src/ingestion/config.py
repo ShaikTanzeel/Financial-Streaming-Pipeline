@@ -13,6 +13,10 @@ or a secrets manager (AWS Secrets Manager, HashiCorp Vault).
 """
 
 import os
+from dotenv import load_dotenv
+
+# Load variables from .env if it exists
+load_dotenv()
 
 # Kafka connection
 # os.getenv() checks for an environment variable first,
