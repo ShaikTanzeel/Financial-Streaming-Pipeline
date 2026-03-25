@@ -4,6 +4,8 @@ End-to-end streaming pipeline that ingests live commodity prices from Yahoo Fina
 
 ## Architecture
 
+![Architecture Diagram](assets/architecture.png)
+
 ```
 Yahoo Finance API
        │
@@ -69,6 +71,20 @@ SELECT
     ) AS sma_20
 FROM gold_prices;
 ```
+
+## Project Snapshots
+
+### 1. Live Grafana Dashboard (Analytics Sink)
+![Grafana Dashboard](assets/grafana_dashboard.png)
+
+### 2. Apache Flink Streaming Job (Processing Layer)
+![Flink UI](assets/flink_dag.png)
+
+### 3. Kafdrop (Kafka Topic Inspection)
+![Kafdrop UI](assets/kafdrop_topic.png)
+
+### 4. Live Python Producer (Ingestion Layer)
+![Terminal Producer](assets/terminal_producer.png)
 
 ## Project Structure
 
