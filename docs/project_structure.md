@@ -19,7 +19,6 @@ End_to_end_project/
 │       └── init.sql               # PostgreSQL schema initialization
 │
 ├── docs/                          # Documentation
-│   ├── learning_guide.md          # Technical concepts reference
 │   └── project_structure.md       # This file
 │
 ├── external_libs/                 # Flink connector JARs (not in git)
@@ -47,5 +46,6 @@ End_to_end_project/
 
 1. **Separation of Concerns** — Each folder has one responsibility
 2. **Environment Isolation** — Credentials live in `.env`, not in code
-3. **Reproducibility** — Anyone can clone and run with `docker compose up -d`
-4. **DRY** — One generic producer handles all commodities via config
+3. **Reproducibility** — Single-command setup with `docker compose up -d`
+4. **DRY (Don't Repeat Yourself)** — Generic producer handles all commodities via configuration
+5. **Observability** — Real-time visibility into every layer via Grafana and Kafdrop

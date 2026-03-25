@@ -23,6 +23,7 @@ Yahoo Finance API
 | Messaging     | Apache Kafka 7.5.0              | Decoupled event streaming          |
 | Processing    | Apache Flink 1.18 (SQL)         | Stateful windowed aggregation      |
 | Storage       | PostgreSQL 16                   | Persistent analytics results       |
+| Visualization | Grafana                         | Real-time analytical dashboard     |
 | Monitoring    | Kafdrop                         | Kafka topic inspection UI          |
 | Orchestration | Docker Compose                  | Single-command infrastructure      |
 
@@ -103,6 +104,7 @@ cp .env.example .env
 
 | Service    | URL                        |
 |------------|----------------------------|
+| Grafana    | http://localhost:3000      |
 | Kafdrop    | http://localhost:9000      |
 | Flink UI   | http://localhost:8081      |
 | PostgreSQL | `localhost:5432`           |
