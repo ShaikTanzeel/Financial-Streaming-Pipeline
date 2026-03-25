@@ -25,6 +25,9 @@ python src/ingestion/commodity_producer.py --ticker CL=F
 python src/ingestion/commodity_producer.py --ticker DX-Y.NYB
 ```
 
+## Configure Flink SQL
+Before starting Flink, open `src/processing/create_tables.sql` in your editor. Scroll to the bottom and replace `'your_username'` and `'your_password'` with the actual PostgreSQL credentials from your `.env` file.
+
 ## Open Flink SQL Client and Load Tables
 This opens the Flink SQL shell and pre-loads all table definitions from `create_tables.sql`:
 ```powershell

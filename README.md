@@ -46,10 +46,14 @@ python src/ingestion/commodity_producer.py --ticker SI=F
 python src/ingestion/commodity_producer.py --ticker CL=F
 python src/ingestion/commodity_producer.py --ticker DX-Y.NYB
 
-# 5. Open Flink SQL client and load table definitions
+# 5. Configure Flink SQL Sink
+# Edit src/processing/create_tables.sql and replace 'your_username' and 'your_password' 
+# with the PostgreSQL credentials you set in your .env file.
+
+# 6. Open Flink SQL client and load table definitions
 docker exec -it flink-jobmanager ./bin/sql-client.sh -i /opt/flink/sql/create_tables.sql
 
-# 6. Start the analytics job (inside Flink SQL)
+# 7. Start the analytics job (inside Flink SQL)
 INSERT INTO gold_analytics_db
 SELECT
     ticker,
