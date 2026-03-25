@@ -55,7 +55,7 @@ FROM gold_prices;
 
 ## Verify Data in PostgreSQL
 ```powershell
-docker exec -it postgres psql -U flink_user -d commodity_analytics
+docker exec -it postgres psql -U <your_username> -d commodity_analytics
 ```
 Then run:
 ```sql
