@@ -40,6 +40,18 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+    depends_on:
+      - postgres
+    volumes:
+      - grafana_data:/var/lib/grafana
+
   postgres:
     image: postgres:16
     container_name: postgres
@@ -109,3 +121,4 @@ volumes:
   flink_lib:            # Flink JARs (including Kafka connector) survive restarts
   flink_checkpoints:    # Flink checkpoint data survives restarts
   postgres_data:        # PostgreSQL data survives restarts
+  grafana_data:         # Grafana dashboards survive restarts
